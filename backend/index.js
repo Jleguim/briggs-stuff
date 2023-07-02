@@ -16,6 +16,11 @@ const LicensingRoutes = require('./licensing/Router.js')
 app.use('/', logger)
 app.use('/licensing', LicensingRoutes)
 
+app.get('/', (req, res) => {
+	res.send('Hello world!')
+})
+
+
 app.listen(PORT, async () => {
   console.log('Listening on %d', PORT)
 
