@@ -9,7 +9,7 @@ class Storage {
   }
 
   load() {
-    if (!fs.existsSync(this.storagePath)) return save()
+    if (!fs.existsSync(this.storagePath)) return this.save()
     if (!safeStorage.isEncryptionAvailable()) {
       data = JSON.parse(fs.readFileSync(this.storagePath))
       return
