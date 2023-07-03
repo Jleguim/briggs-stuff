@@ -1,10 +1,10 @@
 var loginDiscordBtn = document.getElementById('loginDiscordBtn')
 
 loginDiscordBtn.addEventListener('click', function() {
-  window.discord.createWindow()
+  window.windowManager.createDiscordWindow()
 })
 
-window.discord.handleWindowClosed(function() {
+window.windowManager.handleDiscordWindowClosed(function() {
   // console.log('Finished')
   window.location.replace('dashboard.html')
 })
