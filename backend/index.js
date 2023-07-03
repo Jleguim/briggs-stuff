@@ -11,12 +11,14 @@ const app = express()
 app.use(express.json())
 
 const logger = require('./logger.js')
-const LicensingRoutes = require('./licensing/Router.js')
+const LicenseRoutes = require('./licensing/Router.js')
 const DiscordRoutes = require('./discord/Router.js')
+const ResourceRoutes = require('./resources/Router.js')
 
 app.use('/', logger)
-app.use('/licensing', LicensingRoutes)
 app.use('/discord', DiscordRoutes)
+app.use('/license', LicenseRoutes)
+app.use('/resource', ResourceRoutes)
 
 app.get('/', (req, res) => {
   res.send('Hello world!')
