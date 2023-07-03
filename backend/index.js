@@ -12,14 +12,15 @@ app.use(express.json())
 
 const logger = require('./logger.js')
 const LicensingRoutes = require('./licensing/Router.js')
+const DiscordRoutes = require('./discord/Router.js')
 
 app.use('/', logger)
 app.use('/licensing', LicensingRoutes)
+app.use('/discord', DiscordRoutes)
 
 app.get('/', (req, res) => {
-	res.send('Hello world!')
+  res.send('Hello world!')
 })
-
 
 app.listen(PORT, async () => {
   console.log('Listening on %d', PORT)
