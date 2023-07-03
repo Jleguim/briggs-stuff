@@ -1,61 +1,58 @@
 const { app, safeStorage } = require('electron')
 const fs = require('fs')
 
-var usrDataPath = app.getPath('userData')
-var storagePath = usrDataPath + '\\config.json'
-var protectedProps = ['access_token', 'refresh_token']
-
-var data = {}
-
-function load() {
-  if (!fs.existsSync(storagePath)) return save()
-  if (!safeStorage.isEncryptionAvailable()) {
-    data = JSON.parse(fs.readFileSync(storagePath))
-    return
+class Storage {
+  constructor(protectedProps = []) {
+    this.storagePath = app.getPath('userData') + '\\config.json'
+    this.protectedProps = protectedProps
+    this.data = {}
   }
 
-  var encryptedData = JSON.parse(fs.readFileSync(storagePath))
-  var decryptedData = {}
-  Object.keys(encryptedData).forEach(key => {
-    var prop = encryptedData[key]
-    if (protectedProps.includes(key)) {
-      var buffer = Buffer.from(prop.data)
-      prop = safeStorage.decryptString(buffer)
+  load() {
+    if (!fs.existsSync(this.storagePath)) return save()
+    if (!safeStorage.isEncryptionAvailable()) {
+      data = JSON.parse(fs.readFileSync(this.storagePath))
+      return
     }
-    decryptedData[key] = prop
-  })
 
-  data = decryptedData
-}
+    var encryptedData = JSON.parse(fs.readFileSync(this.storagePath))
+    var decryptedData = {}
+    Object.keys(encryptedData).forEach(key => {
+      var prop = encryptedData[key]
+      if (this.protectedProps.includes(key)) {
+        var buffer = Buffer.from(prop.data)
+        prop = safeStorage.decryptString(buffer)
+      }
+      decryptedData[key] = prop
+    })
 
-function save() {
-  if (!safeStorage.isEncryptionAvailable()) {
-    return fs.writeFileSync(storagePath, JSON.stringify(data, 0, 3))
+    this.data = decryptedData
   }
 
-  var encryptedData = {}
-  Object.keys(data).forEach(key => {
-    var prop = data[key]
-    if (protectedProps.includes(key)) {
-      prop = safeStorage.encryptString(prop)
+  save() {
+    if (!safeStorage.isEncryptionAvailable()) {
+      return fs.writeFileSync(this.storagePath, JSON.stringify(data, 0, 3))
     }
-    encryptedData[key] = prop
-  })
 
-  fs.writeFileSync(storagePath, JSON.stringify(encryptedData, 0, 3))
+    var encryptedData = {}
+    Object.keys(this.data).forEach(key => {
+      var prop = this.data[key]
+      if (this.protectedProps.includes(key)) {
+        prop = safeStorage.encryptString(prop)
+      }
+      encryptedData[key] = prop
+    })
+
+    fs.writeFileSync(this.storagePath, JSON.stringify(encryptedData, 0, 3))
+  }
+
+  get(key) {
+    return this.data[key]
+  }
+
+  set(key, newData) {
+    this.data[key] = newData
+  }
 }
 
-function get(key) {
-  return data[key]
-}
-
-function set(key, newData) {
-  data[key] = newData
-}
-
-module.exports = {
-  save,
-  load,
-  get,
-  set
-}
+module.exports = new Storage(['access_token', 'refresh_token'])

@@ -14,19 +14,18 @@ ipcMain.handle('createDiscordWindow', function(ev) {
   var childOptions = {
     width: 510,
     height: 700,
-    resizable: false,
+    resizable: false
     // frame: false,
-    // titleBarStyle: 'hidden',
-    webPreferences: { preload: __dirname + '/public/js/preload.js' }
+    // titleBarStyle: 'hidden'
   }
 
   var discordWindow = WindowManager.createChildWindow(url, true, childOptions)
   discordWindow.removeMenu()
 
-  discordWindow.on('resize', ev => {
-    var [width, height] = discordWindow.getSize()
-    console.log(`w: ${width}, h: ${height}`)
-  })
+  // discordWindow.on('resize', ev => {
+  //   var [width, height] = discordWindow.getSize()
+  //   console.log(`w: ${width}, h: ${height}`)
+  // })
 
   // https://stackoverflow.com/a/38341608/10259845
   discordWindow.webContents.on('will-navigate', async function(ev, url) {
