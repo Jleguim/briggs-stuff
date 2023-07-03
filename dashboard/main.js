@@ -17,10 +17,7 @@ app.once('ready', async () => {
     }
   })
 
-  var access_token = Storage.get('access_token')
-  var refresh_token = Storage.get('refresh_token')
-
-  if (!refresh_token || !access_token) {
+  if (!Storage.get('refresh_token') || !Storage.get('access_token')) {
     // Need an access_token dummy! prompt login
     // No way of getting a new refresh_token, prompt login
     return WindowManager.changeMainWindowView('./public/views/login.html')
@@ -43,7 +40,7 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
 
-app.on('before-quit', function(ev) {
+app.on('will-quit', function(ev) {
   ev.preventDefault()
   Storage.save()
   app.exit()
