@@ -1,5 +1,3 @@
-const User = require('./User.model')
-
 const api = require('./ApiCalls')
 
 module.exports.redirect = async function(req, res) {
