@@ -31,7 +31,18 @@ async function refresh_token() {
   return response.body
 }
 
+async function revoke_token() {
+  var endpoint = ApiUri + 'discord/revoke_token'
+  var response = await superagent
+    .get(endpoint)
+    .query({ access_token: Storage.get('access_token') })
+    .ok(res => res.status < 500)
+    .catch(err => console.log(err))
+  return response.body
+}
+
 module.exports = {
   refresh_token,
+  revoke_token,
   exchange_code
 }

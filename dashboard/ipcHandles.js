@@ -6,6 +6,7 @@ const Storage = require('./Storage')
 
 ipcMain.handle('getUserData', API.discord.getUserData)
 ipcMain.handle('refresh_token', API.auth.refresh_token)
+ipcMain.handle('revoke_token', API.auth.revoke_token)
 
 ipcMain.handle('createDiscordWindow', function(ev) {
   var url =
