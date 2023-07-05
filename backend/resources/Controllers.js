@@ -6,8 +6,8 @@ const License = require('../models/License.model')
 module.exports.getResourcesCreatedByMe = async function(req, res) {
   var user = req._user
   const resources = await Resource.find({ owner: user._id })
-    .populate('owner', '-_id -access_token -refresh_token -resources')
-    .populate('licenses', '-_id -resource -seller')
+    .populate('owner', '-access_token -refresh_token -resources')
+    .populate('licenses', '-resource -seller')
 
   res.send(resources)
 }
