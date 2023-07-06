@@ -1,5 +1,5 @@
 const superagent = require('superagent')
-const Storage = require('../Storage')
+const { Storage } = require('../Storage')
 
 const DiscordUri = 'https://discord.com/api/v10/'
 

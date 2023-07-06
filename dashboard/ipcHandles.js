@@ -2,11 +2,12 @@ const { ipcMain } = require('electron')
 
 const WindowManager = require('./WindowManager')
 const API = require('./api/index')
-const Storage = require('./Storage')
+const { Storage, Data } = require('./Storage')
 
 ipcMain.handle('getUserData', API.discord.getUserData)
 ipcMain.handle('refresh_token', API.auth.refresh_token)
 ipcMain.handle('revoke_token', API.auth.revoke_token)
+ipcMain.handle('getMyResources', API.licensing.getMyResources)
 
 ipcMain.handle('createDiscordWindow', function(ev) {
   var url =
@@ -17,7 +18,6 @@ ipcMain.handle('createDiscordWindow', function(ev) {
     height: 700,
     resizable: false
     // frame: false,
-    // titleBarStyle: 'hidden'
   }
 
   var discordWindow = WindowManager.createChildWindow(url, true, childOptions)
@@ -33,11 +33,16 @@ ipcMain.handle('createDiscordWindow', function(ev) {
     var queryParams = new URL(url).searchParams
     var code = queryParams.get('code')
 
-    var tokenData = await API.auth.exchange_code(code)
-    if (!tokenData) return discordWindow.loadURL(url)
+    var authData = await API.auth.exchange_code(code)
+    if (!authData) return discordWindow.loadURL(url)
 
-    Storage.set('access_token', tokenData.access_token)
-    Storage.set('refresh_token', tokenData.refresh_token)
+    Storage.set('access_token', authData.access_token)
+    Storage.set('refresh_token', authData.refresh_token)
+    Data.set('bearerToken', 'Bearer ' + authData.id)
+    Data.set('disocordId', authData.discordId)
+
+    var resources = await API.licensing.getMyResources()
+    console.log(resources)
 
     discordWindow.close()
     discordWindow.getParentWindow().webContents.send('discordWindowClosed')

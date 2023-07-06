@@ -1,7 +1,7 @@
 const { app, safeStorage } = require('electron')
 const fs = require('fs')
 
-class Storage {
+class StorageClass {
   constructor(protectedProps = []) {
     this.storagePath = app.getPath('userData') + '\\config.json'
     this.protectedProps = protectedProps
@@ -55,4 +55,8 @@ class Storage {
   }
 }
 
-module.exports = new Storage(['access_token', 'refresh_token'])
+module.exports = {
+  StorageClass,
+  Storage: new StorageClass(['access_token', 'refresh_token']),
+  Data: new StorageClass(['access_token', 'refresh_token'])
+}

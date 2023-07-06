@@ -1,5 +1,5 @@
 const superagent = require('superagent')
-const Storage = require('../Storage')
+const { Storage } = require('../Storage')
 
 const ApiUri = 'http://localhost:1337/'
 

@@ -2,7 +2,7 @@ const { app } = require('electron')
 const path = require('path')
 
 const WindowManager = require('./WindowManager')
-const Storage = require('./Storage')
+const { Storage, Data } = require('./Storage')
 const API = require('./api/index')
 
 app.once('ready', async () => {
@@ -24,14 +24,16 @@ app.once('ready', async () => {
   }
 
   // Try refreshing the access_token
-  var tokenData = await API.auth.refresh_token()
-  if (!tokenData.access_token) {
+  var authData = await API.auth.refresh_token()
+  if (!authData.access_token) {
     // Error, prompt login
     return WindowManager.changeMainWindowView('./public/views/login.html')
   }
 
-  Storage.set('access_token', tokenData.access_token)
-  Storage.set('refresh_token', tokenData.refresh_token)
+  Storage.set('access_token', authData.access_token)
+  Storage.set('refresh_token', authData.refresh_token)
+  Data.set('bearerToken', 'Bearer ' + authData.id)
+  Data.set('disocordId', authData.discordId)
 
   WindowManager.changeMainWindowView('./public/views/dashboard.html')
 })
