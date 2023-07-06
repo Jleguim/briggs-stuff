@@ -7,12 +7,39 @@
   <title>Dashboard</title>
 </head>
 
+<style>
+  table,
+  th,
+  td {
+    border: 1px solid black;
+  }
+</style>
+
 <body>
   <img id="userImg">
   <p id="userInfo"></p>
   <input type="button" value="Logout" id="logoutBtn">
 
-  <script src="../js/dashboard.js"></script>
+  <template id="tResourceTable">
+    <table style="width: 100%;">
+      <caption id="title"></caption>
+      <tr>
+        <th>Key</th>
+        <th>isActive</th>
+        <th>Creation Date</th>
+      </tr>
+    </table>
+  </template>
+
+  <template id="tResourceTableRow">
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </template>
+
+  <script src=" ../js/dashboard.js"></script>
 </body>
 
 </html>
