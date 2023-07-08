@@ -1,7 +1,5 @@
 const jwt = require('jsonwebtoken')
-const moment = require('moment')
 
-const api = require('./api')
 const User = require('./Models/User.model')
 
 module.exports.getUser = async function(req, res, next) {

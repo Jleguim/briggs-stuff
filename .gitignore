@@ -3,7 +3,6 @@ replit.nix
 temp/
 
 bin
-test.js
 package-lock.json
 
 # Logs
