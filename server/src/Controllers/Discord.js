@@ -37,8 +37,7 @@ module.exports.redirect = function(req, res) {
       client_id: process.env.CLIENT_ID,
       response_type: 'code',
       scope: ['identify'],
-      redirect_uri: encodeURI(req.query.uri),
-      test: true
+      redirect_uri: encodeURI(req.query.uri)
     }
   })
   res.redirect(authorization_uri)
