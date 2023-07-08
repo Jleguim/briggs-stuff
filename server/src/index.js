@@ -26,13 +26,11 @@ const TestRoutes = require('./Routers/Test')
 app.use('/discord', DiscordRoutes)
 app.use('/test', TestRoutes)
 
-app.listen(PORT, async () => {
-  console.log('Listening on %d', PORT)
-
-  try {
-    await mongoose.connect(MONGO_URL)
-    console.log('Connected to mongo server')
-  } catch (error) {
-    throw error
-  }
-})
+mongoose
+  .connect(MONGO_URL)
+  .then(() => console.log('Connected to mongo server'))
+  .then(() => app.listen(PORT))
+  .then(() => console.log('Listening on %d', PORT))
+  .catch(err => {
+    throw err
+  })
