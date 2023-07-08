@@ -1,21 +1,13 @@
 {
-  "name": "nodejs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@types/node": "^18.0.6",
+  "name": "briggs-stuff",
+  "version": "2.0.0",
+  "description": "A bunch of stuff you shouldn't be looking at, but here we are.",
+  "author": "Jleguim",
+  "license": "MIT",
+  "devDependencies": {
     "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "moment": "^2.29.4",
-    "mongoose": "^7.3.1",
-    "node-fetch": "^3.2.6",
-    "superagent": "^8.0.9"
+    "electron": "^25.2.0",
+    "nodemon": "^2.0.22",
+    "pkg": "^5.8.1"
   }
 }

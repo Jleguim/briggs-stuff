@@ -1,0 +1,19 @@
+{
+  "name": "site",
+  "version": "1.0.0",
+  "description": "briggs-stuff site",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon ."
+  },
+  "author": "Jleguim",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "nodemonConfig": {
+    "events": {
+      "start": "echo --------------------\n & clear || cls"
+    }
+  }
+}
