@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const api = require('../api')
 const User = require('../Models/User.model')
 
-module.exports.auth = async function(req, res) {
+module.exports.auth = async function (req, res) {
   try {
     var code = req.query.code
     var uri = req.query.uri
@@ -24,11 +24,11 @@ module.exports.auth = async function(req, res) {
     res.send(token)
   } catch (err) {
     res.sendStatus(401)
-    console.log(err.response.body || err)
+    console.log(err)
   }
 }
 
-module.exports.redirect = function(req, res) {
+module.exports.redirect = function (req, res) {
   var authorization_uri = url.format({
     host: 'discord.com',
     protocol: 'https',
