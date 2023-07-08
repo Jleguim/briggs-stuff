@@ -1,7 +1,6 @@
 const superagent = require('superagent')
 
 const DISCORD_API = 'https://discord.com/api/v10'
-const REDIRECT_URI = 'http://localhost:1337/discord/oauth2/callback'
 
 module.exports.exchange = async function(code, uri) {
   return await superagent
