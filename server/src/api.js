@@ -12,7 +12,6 @@ module.exports.exchange = async function(code, uri) {
       client_secret: process.env.CLIENT_SECRET,
       grant_type: 'authorization_code',
       code: code,
-      // redirect_uri: REDIRECT_URI
       redirect_uri: uri
     })
 }
