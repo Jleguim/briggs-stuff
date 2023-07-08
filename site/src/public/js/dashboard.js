@@ -1,14 +1,13 @@
 async function main() {
   var jwt = document.cookies['briggs']
-	if (!jwt) return window.open('/', '_self')
-	
-  var response = await fetch(`${document.api}/test`, {
-    headers: {
-      briggs: jwt
-    }
-  })
+  if (!jwt) return window.open('/', '_self')
 
-  console.log(await response.text())
+  var url = `${document.api}/test/api/identify`
+  var options = { headers: { briggs: jwt } }
+  var response = await fetch(url, options)
+  var body = await response.json()
+
+  document.write(JSON.stringify(body, 0, 3))
 }
 
 main()

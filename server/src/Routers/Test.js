@@ -1,20 +1,18 @@
 const express = require('express')
 const TestRoutes = express.Router()
 
-function asyncStuff(number = 500) {
-  return new Promise((resolve, reject) => {
-    var i = 0
-    while (i < number) i++
-    resolve({ foo: true, bar: 500, baz: { something: 'else' } })
-  })
-}
-
 const { verifyJWT, getUser } = require('../middleware')
+const api = require('../api')
 
-TestRoutes.get('/', verifyJWT, getUser, function(req, res) {
-  console.log(req.jwt)
-  console.log(req.user)
-  res.sendStatus(200)
+TestRoutes.get('/api/identify', verifyJWT, getUser, async function(req, res) {
+  try {
+    var access_token = req.jwt.tokens.access_token
+    var response = await api.identify(access_token)
+    res.send(response.body)
+  } catch (err) {
+    res.sendStatus(401)
+    console.log(err.response.body || err)
+  }
 })
 
 module.exports = TestRoutes
