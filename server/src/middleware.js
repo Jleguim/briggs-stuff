@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 
 const User = require('./Models/User.model')
 
-module.exports.getUser = async function(req, res, next) {
+module.exports.getUser = async function (req, res, next) {
   try {
     var token = req.jwt
     var user = await User.findById(token.user_id)
@@ -17,7 +17,7 @@ module.exports.getUser = async function(req, res, next) {
   }
 }
 
-module.exports.verifyJWT = function(req, res, next) {
+module.exports.verifyJWT = function (req, res, next) {
   try {
     var token = req.headers.briggs
     var data = jwt.verify(token, process.env.JWT_SECRET)

@@ -33,6 +33,6 @@ mongoose
   .then(() => console.log('Connected to mongo server'))
   .then(() => app.listen(PORT))
   .then(() => console.log('Listening on %d', PORT))
-  .catch(err => {
+  .catch((err) => {
     throw err
   })

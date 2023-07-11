@@ -1,4 +1,4 @@
-async function main () {
+async function main() {
   var jwt = document.cookies['briggs']
   if (!jwt) return window.open('/', '_self')
 

@@ -1,4 +1,4 @@
-async function main () {
+async function main() {
   var params = new URL(window.location).searchParams
   var code = params.get('code')
   if (!code) return window.open('/', '_self')

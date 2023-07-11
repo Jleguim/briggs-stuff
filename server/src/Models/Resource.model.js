@@ -4,19 +4,19 @@ const moment = require('moment')
 var resourceDefinition = {
   name: { type: String },
   owner: { type: mongoose.Types.ObjectId, ref: 'User', required: true },
-  creationDate: { type: Date, default: moment() }
+  creationDate: { type: Date, default: moment() },
 }
 
 var Resource = new mongoose.Schema(resourceDefinition, {
   toJSON: { virtuals: true },
   toObject: { virtuals: true },
-  id: false
+  id: false,
 })
 
 Resource.virtual('licenses', {
   ref: 'License',
   localField: '_id',
-  foreignField: 'resource'
+  foreignField: 'resource',
 })
 
 module.exports = mongoose.model('Resource', Resource)

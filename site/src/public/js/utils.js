@@ -1,5 +1,5 @@
 function getCookies() {
-  var cookieEntries = document.cookie.split('; ').map(v => v.split('='))
+  var cookieEntries = document.cookie.split('; ').map((v) => v.split('='))
   var cookieObject = Object.fromEntries(cookieEntries)
   return cookieObject
 }

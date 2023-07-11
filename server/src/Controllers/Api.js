@@ -9,7 +9,7 @@ module.exports.resource = {
     try {
       var resource = await Resource.create({
         name: 'My resource',
-        owner: req.user._id
+        owner: req.user._id,
       })
       res.send(resource)
     } catch (err) {
@@ -53,14 +53,14 @@ module.exports.resource = {
       res.sendStatus(401)
       console.log(err)
     }
-  }
+  },
 }
 
 module.exports.license = {
   create: async function (req, res) {},
   getOne: async function (req, res) {},
   getAll: async function (req, res) {},
-  update: async function (req, res) {}
+  update: async function (req, res) {},
 }
 
 module.exports.discord = {
@@ -74,5 +74,5 @@ module.exports.discord = {
       res.sendStatus(401)
       console.log(err)
     }
-  }
+  },
 }
