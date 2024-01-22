@@ -8,6 +8,16 @@
 
   <body>
     <script src="../js/utils.js" type="text/javascript"></script>
-    <script src="../js/auth.js" type="text/javascript"></script>
+    <script src="../js/OAuthServices.js" type="text/javascript"></script>
+    <script>
+      switch (document.location.pathname) {
+        case '/auth/discord':
+          DiscordOAuthService.authentiate()
+          break
+        case '/auth/twitch':
+          TwitchOAuthService.authentiate()
+          break
+      }
+    </script>
   </body>
 </html>
