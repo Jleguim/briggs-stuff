@@ -53,7 +53,7 @@ class OAuthService {
     var user = await User.findOne(filter)
     if (!user) user = await User.create(filter)
 
-    var jwt = this.parseJWT({ user_id: user.id })
+    var jwt = this.parseJWT({ user_id: user._id })
     res.send(jwt)
   }
 }
