@@ -44,8 +44,8 @@ class OAuthService {
     return body
   }
 
-  async authenticate(req, res) {
-    var tokenRes = await this.generateTokens(req.query.code, req.query.uri)
+  async authenticate(code, uri) {
+    var tokenRes = await this.generateTokens(code, uri)
     var identifyRes = await this.identifyUser(tokenRes.body.access_token)
     var parsedBody = this.parseIdentifyBody(identifyRes.body)
 
@@ -61,7 +61,7 @@ class OAuthService {
 
     await user.save()
     var jwt = this.parseJWT({ user_id: user._id })
-    res.send(jwt)
+    return jwt
   }
 }
 

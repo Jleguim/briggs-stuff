@@ -20,11 +20,9 @@ app.use((req, res, next) => {
   next()
 })
 
-const TestRoutes = require('./Routers/Test')
-const AuthRoutes = require('./Routers/Auth')
-const ApiRoutes = require('./Routers/Api')
+const AuthRoutes = require('./Routers/auth.routes')
+const ApiRoutes = require('./Routers/api.routes')
 
-app.use('/test', TestRoutes)
 app.use('/auth', AuthRoutes)
 app.use('/api', ApiRoutes)
 

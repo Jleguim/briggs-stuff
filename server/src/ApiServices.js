@@ -27,7 +27,7 @@ class DiscordApiService extends ApiService {
 
   async getCurrentUser() {
     var meRes = await this.get('/users/@me')
-    if (clipsRes.statusCode == 401) {
+    if (meRes.statusCode == 401) {
       // refresh that shit token
       return console.log('DEAD TOKEN 💀')
     }
@@ -48,24 +48,13 @@ class TwitchApiService extends ApiService {
 
   async getCurrentUser() {
     var meRes = await this.get('/users')
-    if (clipsRes.statusCode == 401) {
+    if (meRes.statusCode == 401) {
       // refresh that shit token
       return console.log('DEAD TOKEN 💀')
     }
 
-    return meRes.body
+    return meRes.body.data[0]
   }
-
-  // async getClips(id) {
-  //   if (!id) id = this.id
-  //   var clipsRes = await this.get('/clips').query({ first: 100, broadcaster_id: id })
-  //   if (clipsRes.statusCode == 401) {
-  //     // refresh that shit token
-  //     return console.log('DEAD TOKEN 💀')
-  //   }
-
-  //   return clipsRes.body
-  // }
 }
 
 module.exports = { TwitchApiService, DiscordApiService }
