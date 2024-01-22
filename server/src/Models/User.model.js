@@ -3,6 +3,20 @@ const moment = require('moment')
 
 var userDefinition = {
   email: { type: String, unique: true },
+  oauth: {
+    twitch: {
+      access_token: { type: String },
+      refresh_token: { type: String },
+      expires_in: { type: Number },
+      id: { type: String },
+    },
+    discord: {
+      access_token: { type: String },
+      refresh_token: { type: String },
+      expires_in: { type: Number },
+      id: { type: String },
+    },
+  },
   creationDate: { type: Date, default: moment() },
 }
 

@@ -52,7 +52,14 @@ class OAuthService {
     var filter = { [`${this.identifier.documentPath}`]: parsedBody[`${this.identifier.dataPath}`] }
     var user = await User.findOne(filter)
     if (!user) user = await User.create(filter)
+    user.oauth[`${this.name.toLowerCase()}`] = {
+      access_token: tokenRes.body.access_token,
+      refresh_token: tokenRes.body.refresh_token,
+      expires_in: tokenRes.body.expires_in,
+      id: parsedBody.id,
+    }
 
+    await user.save()
     var jwt = this.parseJWT({ user_id: user._id })
     res.send(jwt)
   }
