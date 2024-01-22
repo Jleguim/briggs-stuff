@@ -22,9 +22,11 @@ app.use((req, res, next) => {
 
 const TestRoutes = require('./Routers/Test')
 const AuthRoutes = require('./Routers/Auth')
+const ApiRoutes = require('./Routers/Api')
 
 app.use('/test', TestRoutes)
 app.use('/auth', AuthRoutes)
+app.use('/api', ApiRoutes)
 
 mongoose
   .connect(MONGO_URL)
