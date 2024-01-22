@@ -16,6 +16,26 @@ class ApiService {
   }
 }
 
+class DiscordApiService extends ApiService {
+  constructor(OAuthData) {
+    super()
+    this.name = 'Discord'
+    this.ApiUri = 'https://discord.com/api/v10'
+    this.client_id = process.env.DISCORD_CLIENT_ID
+    this.access_token = OAuthData.access_token
+  }
+
+  async getCurrentUser() {
+    var meRes = await this.get('/users/@me')
+    if (clipsRes.statusCode == 401) {
+      // refresh that shit token
+      return console.log('DEAD TOKEN 💀')
+    }
+
+    return meRes.body
+  }
+}
+
 class TwitchApiService extends ApiService {
   constructor(OAuthData) {
     super()
@@ -26,16 +46,26 @@ class TwitchApiService extends ApiService {
     this.id = OAuthData.id
   }
 
-  async getClips(id) {
-    if (!id) id = this.id
-    var clipsRes = await this.get('/clips').query({ first: 100, broadcaster_id: id })
+  async getCurrentUser() {
+    var meRes = await this.get('/users')
     if (clipsRes.statusCode == 401) {
       // refresh that shit token
       return console.log('DEAD TOKEN 💀')
     }
 
-    return clipsRes.body
+    return meRes.body
   }
+
+  // async getClips(id) {
+  //   if (!id) id = this.id
+  //   var clipsRes = await this.get('/clips').query({ first: 100, broadcaster_id: id })
+  //   if (clipsRes.statusCode == 401) {
+  //     // refresh that shit token
+  //     return console.log('DEAD TOKEN 💀')
+  //   }
+
+  //   return clipsRes.body
+  // }
 }
 
-module.exports = TwitchApiService
+module.exports = { TwitchApiService, DiscordApiService }
