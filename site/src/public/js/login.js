@@ -15,7 +15,7 @@ const AuthServices = {
     url: `https://discord.com/oauth2/authorize`,
     client_id: '843306464302071818',
     redirect_uri: encodeURI(window.location.origin + '/auth/discord'),
-    scope: ['identify'],
+    scope: ['identify', 'email'],
     response_type: 'code',
   },
 }

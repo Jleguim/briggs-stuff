@@ -1,9 +1,14 @@
 const express = require('express')
 const AuthRoutes = express.Router()
 
-const Controllers = require('../Controllers/Auth')
+const { DiscordOAuthService, TwitchOAuthService } = require('../OAuthServices')
 
-AuthRoutes.get('/discord', Controllers.discord)
-AuthRoutes.get('/twitch', Controllers.twitch)
+AuthRoutes.get('/discord', function (req, res) {
+  DiscordOAuthService.authenticate(req, res)
+})
+
+AuthRoutes.get('/twitch', function (req, res) {
+  TwitchOAuthService.authenticate(req, res)
+})
 
 module.exports = AuthRoutes

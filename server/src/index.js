@@ -21,10 +21,9 @@ app.use((req, res, next) => {
 })
 
 const TestRoutes = require('./Routers/Test')
-const ApiRoutes = require('./Routers/Api')
-app.use('/test', TestRoutes)
-app.use('/api', ApiRoutes)
 const AuthRoutes = require('./Routers/Auth')
+
+app.use('/test', TestRoutes)
 app.use('/auth', AuthRoutes)
 
 mongoose
