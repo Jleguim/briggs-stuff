@@ -20,13 +20,12 @@ app.use((req, res, next) => {
   next()
 })
 
-const DiscordRoutes = require('./Routers/Discord')
 const TestRoutes = require('./Routers/Test')
 const ApiRoutes = require('./Routers/Api')
-
-app.use('/discord', DiscordRoutes)
 app.use('/test', TestRoutes)
 app.use('/api', ApiRoutes)
+const AuthRoutes = require('./Routers/Auth')
+app.use('/auth', AuthRoutes)
 
 mongoose
   .connect(MONGO_URL)

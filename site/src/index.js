@@ -16,7 +16,8 @@ function sendFile(file, res) {
 }
 
 app.get('/', (req, res) => sendFile('index.html', res))
-app.get('/auth', (req, res) => sendFile('auth.html', res))
+app.get('/auth/discord', (req, res) => sendFile('auth.html', res))
+app.get('/auth/twitch', (req, res) => sendFile('auth.html', res))
 app.get('/dashboard', (req, res) => sendFile('dashboard.html', res))
 
 app.listen(PORT, async () => {
